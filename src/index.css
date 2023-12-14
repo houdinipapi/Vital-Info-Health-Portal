@@ -1,9 +1,17 @@
+* {
+    font-family: Public Sans;
+}
+
 html, body {
     margin: 0;
     padding: 0;
+
 }
 
-a{
+
+
+
+a {
     text-decoration: none;
     color: white;
 }

@@ -8,14 +8,6 @@ export const routes = [
     pathname: 'Medicines',
   },
   {
-    path: '/user/account',
-    pathname: 'Account',
-  },
-  {
-    path: '/dev/support',
-    pathname: 'Contact',
-  },
-  {
     path: '/auth/sign-in',
     pathname: 'Sign In',
   },
@@ -23,4 +15,10 @@ export const routes = [
     path: '/auth/register',
     pathname: 'Register',
   },
+  {
+    path: '/auth/logout',
+    pathname: 'log out',
+  },
 ];
+
+export const siteName = "Health Records"

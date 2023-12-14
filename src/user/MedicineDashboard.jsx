@@ -1,6 +1,7 @@
 import  { useState, useEffect } from 'react';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, TextField, TablePagination, Container, Typography } from '@mui/material';
 import axios from 'axios';
+import MotionWrapper from '../components/animation/Motion';
 
 const MedicinesDashboard = () => {
   const [medicines, setMedicines] = useState([]);
@@ -41,53 +42,57 @@ const MedicinesDashboard = () => {
   );
 
   return (
-    <Container>
+    <MotionWrapper>
 
-      <Typography marginTop={"1rem"} fontSize={"34px"}>Filter Medicines:</Typography>
-      <TextField
-        fullWidth
-        label="Search Medicines"
-        value={filterValue}
-        onChange={handleFilterChange}
-        variant="outlined"
-        margin="normal"
-      />
-      <TableContainer component={Paper} >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Description</TableCell>
+      <Container>
 
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {(rowsPerPage > 0
-              ? filteredMedicines.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : filteredMedicines
-            ).map((medicine) => (
-              <TableRow key={medicine.id}>
-                <TableCell>{medicine.id}</TableCell>
-                <TableCell>{medicine.title}</TableCell>
-                <TableCell>{medicine.body}</TableCell>
-
+        <Typography marginTop={"1rem"} fontSize={"34px"}>Filter Medicines:</Typography>
+        <TextField
+          fullWidth
+          label="Search Medicines"
+          value={filterValue}
+          onChange={handleFilterChange}
+          variant="outlined"
+          margin="normal"
+        />
+        <TableContainer component={Paper} >
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>Description</TableCell>
 
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={filteredMedicines.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </TableContainer>
-    </Container>
+            </TableHead>
+            <TableBody>
+              {(rowsPerPage > 0
+                ? filteredMedicines.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                : filteredMedicines
+              ).map((medicine) => (
+                <TableRow key={medicine.id}>
+                  <TableCell>{medicine.id}</TableCell>
+                  <TableCell>{medicine.title}</TableCell>
+                  <TableCell>{medicine.body}</TableCell>
+
+
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={filteredMedicines.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </TableContainer>
+      </Container>
+    </MotionWrapper>
+
   );
 };
 

@@ -16,9 +16,14 @@
     "@mui/icons-material": "^5.15.0",
     "@mui/material": "^5.15.0",
     "axios": "^1.6.2",
+    "chart.js": "^4.4.1",
+    "framer-motion": "^10.16.16",
+    "js-cookie": "^3.0.5",
     "react": "^17.0.0 || ^18.0.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^17.0.0 || ^18.0.0",
-    "react-router-dom": "^6.20.1"
+    "react-router-dom": "^6.20.1",
+    "universal-cookie": "^6.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
