@@ -39,9 +39,6 @@ function App() {
         <Route path="/auth/register" Component={RegisterPage}/>
         <Route path="/auth/logout" Component={Logout}/>
 
-
-
-
         {/* Customer Routes */}
         <Route path="/user/dashboard" Component={Dashboard}/>
         <Route path="/user/medicines" Component={MedicinesDashboard}/>
