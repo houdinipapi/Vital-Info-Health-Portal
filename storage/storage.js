@@ -22,3 +22,9 @@ export const routes = [
 ];
 
 export const siteName = "Health Records"
+
+export const DashboardCardData = [
+  {
+    title: "Card 1"
+  }
+]

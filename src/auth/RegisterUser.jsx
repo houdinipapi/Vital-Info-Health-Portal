@@ -10,11 +10,14 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { loginUser } from '../services/auth/authService';
+import { RegisterUser } from '../services/auth/authService';
 import { useContext, useEffect } from 'react';
 import AuthContext from '../context/auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import MotionWrapper from '../components/animation/Motion';
+
+
+
 
 function Copyright(props) {
   return (
@@ -31,11 +34,10 @@ function Copyright(props) {
 
 
 
-export default function SignIn() {
-  const { auth, setAuth } = useContext(AuthContext);
+export default function RegisterPage() {
+  const { accountCreated, setAccountCreated } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,22 +46,24 @@ export default function SignIn() {
     const userData = {
       username: data.get("username"),
       password: data.get("password"),
+      email: data.get("email")
     }
 
-    await loginUser(userData, setAuth);
-
-
+    await RegisterUser(userData, setAccountCreated);
   };
 
   useEffect(() => {
-    if(auth) {
-      navigate("/user/dashboard")
+    if(accountCreated) {
+      navigate("/auth/sign-in")
     }
   })
 
+
+
   return (
     <MotionWrapper>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+
+      <Grid container component="main" sx={{ height: '100vh' }} >
         <CssBaseline />
         <Grid
           item
@@ -89,7 +93,7 @@ export default function SignIn() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Create an account
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -100,7 +104,15 @@ export default function SignIn() {
                 label="Username"
                 name="username"
                 autoComplete="username"
-                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
               />
               <TextField
                 margin="normal"
@@ -122,7 +134,7 @@ export default function SignIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Create account
               </Button>
               <Grid container>
                 <Grid item xs>

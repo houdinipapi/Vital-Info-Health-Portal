@@ -1,14 +1,14 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom"
-import SignIn from "./auth/SignSide"
 import Dashboard from "./user/Dashboard"
 import Layout from "./layouts/Layout"
 import MedicinesDashboard from "./user/MedicineDashboard"
-import Register from "./auth/Register"
 import { useEffect, useState } from "react"
 import AuthContext from "./context/auth/AuthContext"
 import Cookies from "js-cookie"
 import Logout from "./auth/Logout"
 import Landing from "./pages/Landing"
+import LoginPage from "./auth/LoginUser"
+import RegisterPage from "./auth/RegisterUser"
 
 
 
@@ -35,9 +35,11 @@ function App() {
         <Route index Component={Landing}/>
 
         {/* Protected Routes */}
-        <Route path="/auth/sign-in" Component={SignIn}/>
-        <Route path="/auth/register" Component={Register}/>
+        <Route path="/auth/sign-in" Component={LoginPage}/>
+        <Route path="/auth/register" Component={RegisterPage}/>
         <Route path="/auth/logout" Component={Logout}/>
+
+
 
 
         {/* Customer Routes */}

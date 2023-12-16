@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import "../App.css"
+import "../styles/App.css"
 
 import DoctorImage from '../assets/undraw_doctors_p6aq.svg'
 import MotionWrapper from "../components/animation/Motion";
