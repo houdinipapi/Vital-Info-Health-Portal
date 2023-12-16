@@ -1,8 +1,18 @@
 from flask import Flask, abort, jsonify, request
 from auth import Auth
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 AUTH = Auth()
+
+
+
+# app.router('/user/auth/new')
+# app.router('/user/auth/login')
+# app.router('/user/account')
+
 
 
 @app.route('/', methods=["GET"], strict_slashes=False)
