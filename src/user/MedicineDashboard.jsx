@@ -45,7 +45,6 @@ const MedicinesDashboard = () => {
     <MotionWrapper>
 
       <Container>
-
         <Typography marginTop={"1rem"} fontSize={"34px"}>Filter Medicines:</Typography>
         <TextField
           fullWidth
@@ -62,7 +61,6 @@ const MedicinesDashboard = () => {
                 <TableCell>ID</TableCell>
                 <TableCell>Title</TableCell>
                 <TableCell>Description</TableCell>
-
               </TableRow>
             </TableHead>
             <TableBody>
@@ -74,8 +72,6 @@ const MedicinesDashboard = () => {
                   <TableCell>{medicine.id}</TableCell>
                   <TableCell>{medicine.title}</TableCell>
                   <TableCell>{medicine.body}</TableCell>
-
-
                 </TableRow>
               ))}
             </TableBody>

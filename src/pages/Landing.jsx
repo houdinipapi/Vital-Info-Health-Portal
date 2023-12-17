@@ -3,9 +3,19 @@ import "../styles/App.css"
 
 import DoctorImage from '../assets/undraw_doctors_p6aq.svg'
 import MotionWrapper from "../components/animation/Motion";
+import { useContext, useEffect } from "react";
+import AuthContext from "../context/auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 function Landing() {
+  const { auth } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth) navigate("/user/dashboard")
+  })
   return (
     <MotionWrapper>
      <Box className="landing-main">

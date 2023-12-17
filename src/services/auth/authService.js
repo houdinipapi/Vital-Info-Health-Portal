@@ -19,7 +19,10 @@ export const RegisterUser = async (userData, setAccountCreated) => {
     const data = await response.json();
     console.log(data);
 
-    setAccountCreated(true);    
+    setAccountCreated(true);  
+
+    Cookies.set("username", data.username, { expires: 5 })
+    
   } catch (error) {
     console.error('Error registering user:', error);
   }
@@ -41,16 +44,17 @@ export const LoginUser = async (credentials, setAuth) => {
     }
 
     const data = await response.json();
-    console.log('Login successful:', data);
+    console.log('Login successful', data);
 
     // Assuming 'data.token' contains the received token after successful login
     const token = data.authToken;
-    console.log(token);
 
     setAuth(true);
     
     // Set the validatedToken in a cookie 
-    Cookies.set('authToken', token, { expires: 5 }); 
+    Cookies.set('authToken', token, { expires: 5 });
+    
+    Cookies.set("username", data.username, { expires: 5 }) 
 
   } catch (error) {
     console.error('Error logging in:', error);

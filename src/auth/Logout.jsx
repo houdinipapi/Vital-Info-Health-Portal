@@ -38,7 +38,7 @@ const Logout = () => {
         <Typography variant="body1" gutterBottom>
           Are you sure you want to logout?
         </Typography>
-        <Button variant="contained" color="primary" onClick={handleLogout}>
+        <Button variant="contained" color="error" onClick={handleLogout}>
           Logout
         </Button>
       </Box>

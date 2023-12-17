@@ -9,6 +9,9 @@ import Logout from "./auth/Logout"
 import Landing from "./pages/Landing"
 import LoginPage from "./auth/LoginUser"
 import RegisterPage from "./auth/RegisterUser"
+import NotFound from "./pages/NotFound"
+import SubmissionsPage from "./user/Submissions"
+import NewSubmission from "./components/dashboard/DashboardForm"
 
 
 
@@ -33,6 +36,8 @@ function App() {
       <Route path="/" Component={Layout} >
         {/* Defaults Routes */}
         <Route index Component={Landing}/>
+        <Route path="*" Component={NotFound}/>
+
 
         {/* Protected Routes */}
         <Route path="/auth/sign-in" Component={LoginPage}/>
@@ -41,7 +46,10 @@ function App() {
 
         {/* Customer Routes */}
         <Route path="/user/dashboard" Component={Dashboard}/>
+        <Route path="/user/dashboard/new-submission" Component={NewSubmission}/>
+        <Route path="/user/dashboard/submissions" Component={SubmissionsPage}/>
         <Route path="/user/medicines" Component={MedicinesDashboard}/>
+
       </Route>
     )
   )

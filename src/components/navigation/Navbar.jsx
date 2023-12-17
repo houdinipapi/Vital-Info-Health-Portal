@@ -43,7 +43,7 @@ const Navbar = () => {
   const drawerContent = (
     <Box
       sx={{
-        width: 200,
+        width: 200
       }}
       onClick={handleDrawerClose}
       onKeyDown={handleDrawerClose}
@@ -70,7 +70,7 @@ const Navbar = () => {
           <IconButton color="inherit" onClick={handleDrawerOpen}>
             <MenuIcon />
           </IconButton>
-          <Drawer anchor="right" open={openDrawer} onClose={handleDrawerClose}>
+          <Drawer anchor="left" open={openDrawer} onClose={handleDrawerClose}>
             {drawerContent}
           </Drawer>
         </Box>
