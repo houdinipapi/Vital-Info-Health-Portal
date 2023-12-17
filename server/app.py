@@ -33,7 +33,7 @@ def login():
         response = jsonify({"email": email, "message": "logged in"})
         response.set_cookie("session_id", AUTH.create_session(email))
         
-        return jsonify({"authToken": AUTH.create_session(email)})
+        return jsonify({"authToken": AUTH.create_session(email), "username": email })
     abort(401)
 
 
