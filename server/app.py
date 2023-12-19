@@ -40,8 +40,7 @@ def register():
     password = data.get("password")
     email = data.get("email")
 
-    success, message = auth.register_user(
-        username=username, password=password, email=email)
+    success, message = auth.register_user(username=username, password=password, email=email)
 
     if success:
         return jsonify({'message': message}), 201
@@ -57,12 +56,12 @@ def login():
 
     response = auth.login(email=email, password=password)
 
-    if 'token' in response:
+    if "authToken" in response:
         # Returning the entire response dictionary
         return jsonify(response), 200
     else:
         # Returning the entire response dictionary with appropriate status code
-        return jsonify(response), 200
+        return jsonify({"message": "Invalid Credentials"}), 401
 
 
 if __name__ == '__main__':

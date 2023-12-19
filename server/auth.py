@@ -46,7 +46,7 @@ class Auth:
                 conn.close()
 
     @staticmethod
-    def login(email, password):
+    def login(email:str, password:str):
         conn = None
         try:
             conn = DB.create_connection()
@@ -85,13 +85,13 @@ class Auth:
                 conn.close()
 
     @staticmethod
-    def get_user_profile(email):
+    def get_user_profile(email: str):
         conn = None
         try:
             conn = DB.create_connection()
             cur = conn.cursor()
 
-            cur.execute("SELECT * FROM users WHERE email = %s", (email,))
+            cur.execute("SELECT * FROM users WHERE email = %s", (email))
             user_profile = cur.fetchone()
 
             if user_profile:
