@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Formik } from 'formik';
-import { FormData } from '../../../storage/storage';
+import { FormData } from '../../storage/storage';
 import { TextField, Button, Grid, Container, Box } from '@mui/material';
 import * as yup from 'yup';
 

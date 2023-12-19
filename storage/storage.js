@@ -17,13 +17,18 @@ export const routes = [
     path: '/auth/register',
     pathname: 'Register',
   },
+   {
+    path: '/user/profile',
+    pathname: "profile"
+  },
   {
     path: '/auth/logout',
     pathname: 'log out',
   },
+ 
 ];
 
-export const siteName = "Health Records"
+export const siteName = "Vital Hospital Portal"
 
 
 export const FormData = [

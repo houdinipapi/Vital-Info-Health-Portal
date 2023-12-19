@@ -16,13 +16,11 @@ function BackComponent() {
   return (
     <div style={{ 
       position:'fixed',
-      top:"93.5vh", 
-      background: "rgb(0,0,0,0.4)",
-      backdropFilter: "blur(10px)",
+      bottom:"87.5vh", 
       
      }}>
       <IconButton onClick={goBack} aria-label="Go back"  >
-        <ArrowBackIcon /> <Typography ml={"1rem"} color={"white"}>back</Typography>
+        <ArrowBackIcon /> <Typography ml={"1rem"}>back</Typography>
       </IconButton>
     </div>
     

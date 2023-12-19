@@ -39,11 +39,12 @@ export const LoginUser = async (credentials, setAuth) => {
       body: JSON.stringify(credentials),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      return new Error("Login failed")
+      return console.log(data.message)
     }
 
-    const data = await response.json();
     console.log('Login successful', data);
 
     // Assuming 'data.token' contains the received token after successful login

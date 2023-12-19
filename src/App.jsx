@@ -11,8 +11,8 @@ import LoginPage from "./auth/LoginUser"
 import RegisterPage from "./auth/RegisterUser"
 import NotFound from "./pages/NotFound"
 import SubmissionsPage from "./user/Submissions"
-import NewSubmission from "./components/dashboard/DashboardForm"
-
+import NewSubmission from "./user/NewSubmission"
+import ProfilePage from "./user/ProfilePage"
 
 
 function App() {
@@ -46,6 +46,7 @@ function App() {
 
         {/* Customer Routes */}
         <Route path="/user/dashboard" Component={Dashboard}/>
+        <Route path="/user/profile" Component={ProfilePage}/>
         <Route path="/user/dashboard/new-submission" Component={NewSubmission}/>
         <Route path="/user/dashboard/submissions" Component={SubmissionsPage}/>
         <Route path="/user/medicines" Component={MedicinesDashboard}/>
