@@ -7,7 +7,7 @@ function Dashboard() {
   return (
     <MotionWrapper>
       <main>
-        <Typography variant="h5" sx={{ textAlign: 'start', mt: 4, ml: 4 }}>
+        <Typography variant="h5"  sx={{ textAlign: 'start', mt: 4, ml: 4 }}>
           Welcome, {username}
         </Typography>
         <Container maxWidth="lg" sx={{ mt: 4 }}>

@@ -15,8 +15,7 @@ import { useContext, useEffect } from 'react';
 import AuthContext from '../context/auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import MotionWrapper from '../components/animation/Motion';
-
-
+import { Link as RouterLink }  from 'react-router-dom' 
 
 
 function Copyright(props) {
@@ -71,6 +70,7 @@ export default function RegisterPage() {
           sm={4}
           md={7}
           sx={{
+            filter: 'brightness(90%)',
             backgroundImage: 'url(https://plus.unsplash.com/premium_photo-1675686363460-25aa1039e94b?q=80&w=2043&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
@@ -143,9 +143,9 @@ export default function RegisterPage() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
+                  <RouterLink to={"/auth/sign-in"}>
+                    {"Already have an account? Sign In"}
+                  </RouterLink>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

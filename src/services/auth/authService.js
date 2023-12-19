@@ -40,7 +40,7 @@ export const LoginUser = async (credentials, setAuth) => {
     });
 
     if (!response.ok) {
-      throw new Error('Login failed');
+      return new Error("Login failed")
     }
 
     const data = await response.json();
