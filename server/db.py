@@ -1,79 +1,44 @@
-from sqlalchemy import create_engine, tuple_
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.exc import InvalidRequestError
-from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm.session import Session
+import psycopg2
 
-from user import Base, User
+
+DB_HOST = 'localhost'
+DB_NAME = 'db'
+DB_USER = 'postgres'
+DB_PASSWORD = 'Pianist463'
 
 
 class DB:
-    """DB class
-    """
 
-    def __init__(self) -> None:
-        """Initialize a new DB instance
-        """
-        self._engine = create_engine("sqlite:///tmp/a.db", echo=False)
-        Base.metadata.drop_all(self._engine)
-        Base.metadata.create_all(self._engine)
-        self.__session = None
-
-    @property
-    def _session(self) -> Session:
-        """Memoized session object
-        """
-        if self.__session is None:
-            DBSession = sessionmaker(bind=self._engine)
-            self.__session = DBSession()
-        return self.__session
-
-    def add_user(self, email: str, username: str, hashed_password: str) -> User:
-        """
-        Add a user to the database
-        """
-        try:
-            user = User(email=email, username=username, hashed_password=hashed_password)
-            self._session.add(user)
-            self._session.commit()
-        except Exception:
-            self._session.rollback()
-            user = None
-        return user
-
-    def find_user_by(self, **kwargs) -> User:
-        """Finds a user based on a set of filters.
-        """
-        fields, values = [], []
-        for key, value in kwargs.items():
-            if hasattr(User, key):
-                fields.append(getattr(User, key))
-                values.append(value)
-            else:
-                raise InvalidRequestError()
-        result = self._session.query(User).filter(
-            tuple_(*fields).in_([tuple(values)])
-        ).first()
-        if result is None:
-            raise NoResultFound()
-        return result
-
-    def update_user(self, user_id: int, **kwargs) -> None:
-        """
-        Updates a user based on a given id.
-        """
-        user = self.find_user_by(id=user_id)
-        if user is None:
-            return
-        update_source = {}
-        for key, value in kwargs.items():
-            if hasattr(User, key):
-                update_source[getattr(User, key)] = value
-            else:
-                raise ValueError()
-        self._session.query(User).filter(User.id == user_id).update(
-            update_source,
-            synchronize_session=False,
+    def create_connection():
+        conn = psycopg2.connect(
+            host=DB_HOST,
+            database=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
         )
-        self._session.commit()
+        return conn
+
+    def create_tables():
+        conn = DB.create_connection()
+        cur = conn.cursor()
+
+        cur.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(50) UNIQUE NOT NULL,
+                password VARCHAR(100) NOT NULL,
+                email VARCHAR(100) UNIQUE NOT NULL
+            )
+        ''')
+
+        cur.execute('''
+            CREATE TABLE IF NOT EXISTS submissions (
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(50) REFERENCES users(username),
+                data JSONB
+            )
+        ''')
+
+        conn.commit()
+        cur.close()
+        conn.close()

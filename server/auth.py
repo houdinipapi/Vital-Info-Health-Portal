@@ -1,89 +1,112 @@
 import bcrypt
+from flask import Flask
+import jwt
 from db import DB
-from user import User
-import uuid
 
-
-def _hash_password(password: str) -> str:
-    """Hash the password using the bcrypt module"""
-    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+app = Flask(__name__)
+app.secret_key = 'keyboardchickenflappybirdugaliskuma'
 
 
 class Auth:
-    """Auth class to interact with the authentication database.
-    """
 
-    def __init__(self):
-        self._db = DB()
+    @staticmethod
+    def hash_password(password):
+        salt = bcrypt.gensalt()  # Generate a salt
+        hashed_password = bcrypt.hashpw(
+            password.encode(), salt)  # Hash the password
+        return hashed_password.decode()  # Return the hashed password as a string
 
-    def register_user(self, email: str, password: str, username: str) -> User:
-        """Register a new user"""
+    @staticmethod
+    def register_user(username, password, email):
+        conn = None
         try:
-            user = self._db.find_user_by(email=email)
-        except Exception:
-            user = None
-        if user:
-            raise ValueError('User {} already exist'.format(email))
-        hashed_password = _hash_password(password)
-        return self._db.add_user(email, username, hashed_password)
+            conn = DB.create_connection()
+            cur = conn.cursor()
 
-    def valid_login(self, email: str, password: str) -> bool:
-        """Check if the user's credentials are valid"""
+            hashed_password = Auth.hash_password(
+                password)  # Hash the password using bcrypt
+
+            cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+            existing_user = cur.fetchone()
+
+            if existing_user:
+                return False, 'Username already exists'
+
+            cur.execute("INSERT INTO users (username, password, email) VALUES (%s, %s, %s)",
+                        (username, hashed_password, email))
+            conn.commit()
+
+            return True, 'User registered successfully'
+        except Exception as e:
+            return False, f'Error during registration: {e}'
+        finally:
+            if cur:
+                cur.close()
+            if conn:
+                conn.close()
+
+    @staticmethod
+    def login(email, password):
+        conn = None
         try:
-            user = self._db.find_user_by(email=email)
-        except Exception:
-            return False
-        return bcrypt.checkpw(password.encode('utf-8'), user.hashed_password)
+            conn = DB.create_connection()
+            cur = conn.cursor()
 
-    def _generate_uuid(self) -> str:
-        return str(uuid.uuid4())
+            cur.execute("SELECT * FROM users WHERE email = %s", (email,))
+            user = cur.fetchone()
 
-    def create_session(self, email: str) -> str:
-        """Create a session ID for user and return it"""
+            if user:
+                # Fetch the hashed password from the database
+                hashed_password = user[2]
+                # Verify the entered password with the stored hashed password
+                if bcrypt.checkpw(password.encode(), hashed_password.encode()):
+                    # Generate JWT token
+                    token = jwt.encode(
+                        {'email': email}, app.secret_key, algorithm='HS256')
+                    # Return a dictionary with success message, authToken, and username
+                    return {
+                        'message': 'Logged in successfully',
+                        'authToken': token,
+                        'username': email
+                    }
+                else:
+                    # Return a dictionary for error case (invalid credentials)
+                    return {'error': 'Invalid credentials'}
+            else:
+                # Return a dictionary for error case (invalid credentials)
+                return {'error': 'Invalid credentials'}
+        except Exception as e:
+            # Return a dictionary for error case (other exceptions)
+            return {'error': f'Error during login: {e}'}
+        finally:
+            if cur:
+                cur.close()
+            if conn:
+                conn.close()
+
+    @staticmethod
+    def get_user_profile(email):
+        conn = None
         try:
-            user = self._db.find_user_by(email=email)
-        except Exception:
-            return None
-        session_id = self._generate_uuid()
-        self._db.update_user(user.id, session_id=session_id)
-        return session_id
+            conn = DB.create_connection()
+            cur = conn.cursor()
 
-    def get_user_from_session_id(self, session_id: str) -> User:
-        """Get user based on their session ID"""
-        if session_id:
-            try:
-                user = self._db.find_user_by(session_id=session_id)
-            except Exception:
-                return None
-            return user
-        return None
+            cur.execute("SELECT * FROM users WHERE email = %s", (email,))
+            user_profile = cur.fetchone()
 
-    def destroy_session(self, user_id: int) -> None:
-        """Destroy a user's session ID"""
-        self._db.update_user(user_id, session_id=None)
-        return None
+            if user_profile:
+                profile_info = {
+                    'username': user_profile[1],
+                    'email': user_profile[3],
+                }
 
-    def get_reset_password_token(self, email: str) -> str:
-        """Generate a password reset token"""
-        try:
-            user = self._db.find_user_by(email=email)
-        except UserNotFound as e:
-            raise ValueError(f"User with email {email} not found.")
-        reset_token = str(uuid.uuid4())
-        self._db.update_user(user.id, reset_token=reset_token)
-        return reset_token
-
-    def update_password(self, reset_token: str, password: str) -> None:
-        """Update the user's password if reset tooken is available in db"""
-        user = None
-        try:
-            user = self._db.find_user_by(reset_token=reset_token)
-        except Exception:
-            user = None
-        if user is not None:
-            hashed_password = _hash_password(password)
-            self._db.update_user(
-                user.id, hashed_password=hashed_password,
-                reset_token=None
-            )
-        raise ValueError
+                return True, profile_info  # Return profile info for success
+            else:
+                return False, 'User profile not found'
+        except Exception as e:
+            return False, f'Error retrieving user profile: {e}'
+        finally:
+            if cur:
+                cur.close()
+            if conn:
+                conn.close()
