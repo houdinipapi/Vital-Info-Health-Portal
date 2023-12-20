@@ -96,3 +96,4 @@ export const FormData = [
 
 
 export const username = Cookies.get('username')
+export const authToken = Cookies.get("authToken")
