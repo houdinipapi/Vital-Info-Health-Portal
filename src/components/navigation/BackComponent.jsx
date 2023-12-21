@@ -16,7 +16,8 @@ function BackComponent() {
   return (
     <div style={{ 
       position:'fixed',
-      bottom:"87.5vh", 
+      left:"94%", 
+      border: "2px solid black"
       
      }}>
       <IconButton onClick={goBack} aria-label="Go back"  >
