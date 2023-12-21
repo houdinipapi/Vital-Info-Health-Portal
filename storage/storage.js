@@ -6,7 +6,7 @@ export const routes = [
     pathname: 'Dashboard',
   },
   {
-    path: '/user/medicines',
+    path: '/user/dashboard/medicines',
     pathname: 'Medicines',
   },
   {
@@ -35,65 +35,139 @@ export const FormData = [
   {
     label: "First Name",
     name: "firstName",
-    type: "text"
+    type: "text",
+    value: ""
   },
   {
     label: "Last Name",
     name: "lastName",
-    type: "text"
+    type: "text",
+    value: ""
+  },
+  {
+    label: "Kin Name",
+    name: "kinName",
+    type: "text",
+    value: ""
   },
   {
     label: "Date of Birth",
     name: "dateOfBirth",
-    type: "date"
+    type: "date",
+    value: ""
   },
   {
     label: "Age",
     name: "age",
-    type: "number"
+    type: "number",
+    value: ""
   },
   {
     label: "Email",
     name: "email",
-    type: "email"
+    type: "email",
+    value: ""
   },
   {
     label: "Phone",
     name: "phone",
-    type: "tel"
+    type: "tel",
+    value: ""
+  },
+  {
+    label: "Alternate Contact Number",
+    name: "AlternateContactNumber",
+    type: "tel",
+    value: ""
   },
   {
     label: "Address",
     name: "address",
-    type: "text"
+    type: "text",
+    value: ""
   },
   {
     label: "City",
     name: "city",
-    type: "text"
+    type: "text",
+    value: ""
   },
   {
-    label: "State",
-    name: "state",
-    type: "text"
+    label: "County",
+    name: "county",
+    type: "text",
+    value: ""
   },
   {
     label: "Zip Code",
     name: "zip",
-    type: "text"
+    type: "text",
+    value: ""
   },
   {
     label: "Issue",
     name: "issue",
-    type: "textarea"
+    type: "textarea",
+    value: ""
   },
   {
     label: "Symptoms",
     name: "symptoms",
-    type: "textarea"
+    type: "textarea",
+    value: ""
   },
+  {
+    label: "Blood Group",
+    name: "bloodGroup",
+    type: "text",
+    value: ""
+  },
+  {
+    label: "Height",
+    name: "height",
+    type: "text",
+    value: ""
+  },
+  {
+    label: "Next of Kin's Name",
+    name: "nextOfKinsName",
+    type: "text",
+    value: ""
+  },
+  {
+    label: "Weight",
+    name: "weight",
+    type: "text",
+    value: ""
+  },
+  {
+    label: "Aadhar ID",
+    name: "AadharId",
+    type: "text",
+    value: ""
+  },
+  {
+    label: "Pin Code",
+    name: "pinCode",
+    type: "text",
+    value: ""
+  },
+  {
+    label: "Date of Registration",
+    name: "dateOfRegistration",
+    type: "date",
+    value: ""
+  },
+  {
+    label: "Time of Registration",
+    name: "timeOfRegistration",
+    type: "text",
+    value: ""
+  }
 ];
+
 
 
 export const username = Cookies.get('username')
 export const authToken = Cookies.get("authToken")
+export const email = Cookies.get("email")

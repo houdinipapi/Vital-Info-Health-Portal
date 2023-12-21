@@ -6,12 +6,15 @@ import BackComponent from '../components/navigation/BackComponent'
 
 function Layout() {
 
+
+
+
   return (
     <div>
         <Navbar/>
         <BackComponent/>
         <div>
-          <Outlet/>
+          <Outlet />
         </div>
         
     </div>

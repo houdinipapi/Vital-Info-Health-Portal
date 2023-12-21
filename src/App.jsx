@@ -13,6 +13,8 @@ import NotFound from "./pages/NotFound"
 import SubmissionsPage from "./user/Submissions"
 import NewSubmission from "./user/NewSubmission"
 import ProfilePage from "./user/ProfilePage"
+import SubmissionItem from "./components/dashboard/SubmissionItem"
+import MedicineItem from "./components/dashboard/MedicineItem"
 
 
 function App() {
@@ -47,9 +49,14 @@ function App() {
         {/* Customer Routes */}
         <Route path="/user/dashboard" Component={Dashboard}/>
         <Route path="/user/profile" Component={ProfilePage}/>
+
+        <Route path="/user/dashboard/medicines" Component={MedicinesDashboard}/>
+        <Route path="/user/dashboard/medicines/:medicineId" Component={MedicineItem}/>
+
         <Route path="/user/dashboard/new-submission" Component={NewSubmission}/>
         <Route path="/user/dashboard/submissions" Component={SubmissionsPage}/>
-        <Route path="/user/medicines" Component={MedicinesDashboard}/>
+        <Route path="/user/dashboard/submissions/:submissionId" Component={SubmissionItem}/>
+
 
       </Route>
     )

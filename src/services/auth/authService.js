@@ -20,8 +20,6 @@ export const RegisterUser = async (userData, setAccountCreated) => {
     console.log(data);
 
     setAccountCreated(true);  
-
-    Cookies.set("username", data.username, { expires: 5 })
     
   } catch (error) {
     console.error('Error registering user:', error);
@@ -29,7 +27,7 @@ export const RegisterUser = async (userData, setAccountCreated) => {
 };
 
 
-export const LoginUser = async (credentials, setAuth) => {
+export const LoginUser = async (credentials, setAuth, setError, setLoginSuccess) => {
   try {
     const response = await fetch('http://localhost:8080/login', {
       method: 'POST',
@@ -42,6 +40,7 @@ export const LoginUser = async (credentials, setAuth) => {
     const data = await response.json();
 
     if (!response.ok) {
+      setError(data.message)
       return console.log(data.message)
     }
 
@@ -50,12 +49,19 @@ export const LoginUser = async (credentials, setAuth) => {
     // Assuming 'data.token' contains the received token after successful login
     const token = data.authToken;
 
+    setLoginSuccess(true);
     setAuth(true);
+    
     
     // Set the validatedToken in a cookie 
     Cookies.set('authToken', token, { expires: 5 });
     
     Cookies.set("username", data.username, { expires: 5 }) 
+    Cookies.set("email", data.email, { expires: 5 }) 
+
+    setTimeout(() => {
+      window.location.reload();
+    },1500)
 
   } catch (error) {
     console.error('Error logging in:', error);

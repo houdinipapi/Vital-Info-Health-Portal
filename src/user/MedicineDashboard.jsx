@@ -2,12 +2,15 @@ import  { useState, useEffect } from 'react';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, TextField, TablePagination, Container, Typography } from '@mui/material';
 import axios from 'axios';
 import MotionWrapper from '../components/animation/Motion';
+import { useNavigate } from 'react-router-dom';
 
 const MedicinesDashboard = () => {
   const [medicines, setMedicines] = useState([]);
   const [filterValue, setFilterValue] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMedicines = async () => {
@@ -68,10 +71,10 @@ const MedicinesDashboard = () => {
                 ? filteredMedicines.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 : filteredMedicines
               ).map((medicine) => (
-                <TableRow key={medicine.id}>
-                  <TableCell>{medicine.id}</TableCell>
-                  <TableCell>{medicine.title}</TableCell>
-                  <TableCell>{medicine.body}</TableCell>
+                <TableRow key={medicine.id} style={{cursor: "pointer"}}>
+                  <TableCell onClick={() => navigate(`/user/dashboard/medicines/${medicine.id}`)}>{medicine.id}</TableCell>
+                  <TableCell onClick={() => navigate(`/user/dashboard/medicines/${medicine.id}`)}>{medicine.title}</TableCell>
+                  <TableCell onClick={() => navigate(`/user/dashboard/medicines/${medicine.id}`)}>{medicine.body}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

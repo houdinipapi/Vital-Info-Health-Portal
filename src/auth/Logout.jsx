@@ -15,6 +15,10 @@ const Logout = () => {
 
     // Remove 'authToken' cookie
     Cookies.remove("authToken");
+    Cookies.remove("username");
+    Cookies.remove("email");
+
+
 
     // Redirect to the login page after logout
     navigate("/auth/sign-in");

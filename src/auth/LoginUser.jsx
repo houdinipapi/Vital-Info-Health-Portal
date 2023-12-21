@@ -11,10 +11,12 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { LoginUser } from '../services/auth/authService';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../context/auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import MotionWrapper from '../components/animation/Motion';
+import { ToastContainer, toast } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.min.css"
 
 function Copyright(props) {
   return (
@@ -29,14 +31,13 @@ function Copyright(props) {
   );
 }
 
-
-
 export default function LoginPage() {
   const { auth, setAuth } = useContext(AuthContext);
-
+  const [error, setError] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -46,19 +47,27 @@ export default function LoginPage() {
       password: data.get("password"),
     }
 
-    await LoginUser(userData, setAuth);
+    setLoading(true); 
 
+    await LoginUser(userData, setAuth, setError, setLoginSuccess);
 
+    setLoading(false); 
   };
 
   useEffect(() => {
-    if(auth) {
-      navigate("/user/dashboard")
+    if (auth) {
+      navigate("/user/dashboard");
+    } else if (loginSuccess) {
+      toast.success("Login success!!!");
+    } else if (error) {
+      toast.error(error);
     }
-  })
+  }, [auth, loginSuccess, error, navigate]);
 
   return (
     <MotionWrapper>
+      <ToastContainer theme='light' pauseOnHover position='bottom-left' />
+      {loading && <div>Loading...</div>} {/* Display loading state */}
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -143,6 +152,5 @@ export default function LoginPage() {
         </Grid>
       </Grid>
     </MotionWrapper>
-
   );
 }

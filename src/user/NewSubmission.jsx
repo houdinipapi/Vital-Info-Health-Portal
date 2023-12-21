@@ -16,22 +16,42 @@ const validationSchema = yup.object().shape({
   state: yup.string().required("state is required"),
   zip: yup.string().required("zip is required"),
   issue: yup.string().required("issue is required"),
+  symptoms: yup.string("symptoms is required").required(),
+  bloodGroup: yup.string("bloodGroup is required").required(),
+  height: yup.string("height is required").required(),
+  nextOfKinsName: yup.string("nextOfKinsName is required").required(),
+  weight: yup.string("weight is required").required(),
+  AadharId: yup.string("AadharId is required").required(),
+  pinCode: yup.string("pinCode is required").required(),
+  dateOfRegistration: yup.string("dateOfRegistration is required").required(),
+  timeOfRegistration: yup.string("timeOfRegistration is required").required(),
 });
 
 const initialValues = {
   firstName: '',
   lastName: '',
+  kinName: "",
   dateOfBirth: '',
   age: '',
   email: '',
   phone: '',
+  AlternateContactNumber: '',
   address: '',
   city: '',
-  state: '',
+  county: '',
   zip: '',
   issue: '',
   symptoms: '',
+  bloodGroup: '',
+  height: '',
+  nextOfKinsName: '',
+  weight: '',
+  AadharId: '',
+  pinCode: '',
+  dateOfRegistration: '',
+  timeOfRegistration: ''
 };
+
 
 const handleSubmit = (values, { setSubmitting }) => {
   setTimeout(() => {
@@ -65,6 +85,7 @@ const PatientFormFields = ({ formikProps }) => (
       {FormData.map((data, index) => (
         <Grid item xs={12} sm={6} key={index}>
           <TextField
+            InputLabelProps={{shrink: true}}
             fullWidth
             label={data.label}
             name={data.name}
