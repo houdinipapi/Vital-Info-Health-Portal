@@ -63,12 +63,16 @@ class Auth:
                     # Generate JWT token
                     token = jwt.encode(
                         {'email': email}, app.secret_key, algorithm='HS256')
+                    print(user)
+
                     # Return a dictionary with success message, authToken, and username
                     return {
                         'message': 'Logged in successfully',
                         'authToken': token,
-                        'username': email
+                        'email': email,
+                        'username': user[1]
                     }
+                    
                 else:
                     # Return a dictionary for error case (invalid credentials)
                     return {'error': 'Invalid credentials'}
