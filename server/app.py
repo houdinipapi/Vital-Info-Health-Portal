@@ -6,7 +6,6 @@ from db import DB
 from flask_cors import CORS
 
 
-
 app = Flask(__name__)
 CORS(app)
 auth = Auth()
@@ -63,20 +62,6 @@ def login():
     else:
         return jsonify({"message": "Invalid Credentials"}), 401
 
-
-# GET - User profile information request
-@app.route('/user/profile', methods=['PUT'])
-@token_required
-def profile():
-    
-    def edit_profile():
-        pass
-    
-    if request.method == 'PUT':
-        edit_profile();
-
-    
-    
 
 if __name__ == '__main__':
     DB.create_tables()
