@@ -63,6 +63,13 @@ def login():
         return jsonify({"message": "Invalid Credentials"}), 401
 
 
+@app.route('/medicines/new-submissions', methods=['POST']) 
+def new_submission():
+    data = request.json;
+    print(data);
+    
+
+
 if __name__ == '__main__':
     DB.create_tables()
     app.run(debug=True, port=8080)

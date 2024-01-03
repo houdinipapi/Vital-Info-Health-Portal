@@ -46,7 +46,7 @@ export const LoginUser = async (credentials, setAuth, setError, setLoginSuccess)
 
     console.log('Login successful', data);
 
-    // Assuming 'data.token' contains the received token after successful login
+    // Assuming 'data.authToken' contains the received token after successful login
     const token = data.authToken;
 
     setLoginSuccess(true);
