@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+department.py
+doctor.py
+medical_test.py
+patient.py
+prescription.py
+=======
 # Logs
 logs
 *.log
@@ -22,3 +29,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+>>>>>>> frontend
