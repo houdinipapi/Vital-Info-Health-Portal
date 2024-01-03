@@ -40,7 +40,8 @@ def register():
     password = data.get("password")
     email = data.get("email")
 
-    success, message = auth.register_user(username=username, password=password, email=email)
+    success, message = auth.register_user(
+        username=username, password=password, email=email)
 
     if success:
         return jsonify({'message': message}), 201
@@ -63,11 +64,10 @@ def login():
         return jsonify({"message": "Invalid Credentials"}), 401
 
 
-@app.route('/medicines/new-submissions', methods=['POST']) 
+@app.route('/medicines/new-submissions', methods=['POST'])
 def new_submission():
-    data = request.json;
-    print(data);
-    
+    data = request.json
+    print(data)
 
 
 if __name__ == '__main__':
