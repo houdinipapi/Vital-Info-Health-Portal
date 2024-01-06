@@ -4,7 +4,7 @@ import psycopg2
 DB_HOST = 'localhost'
 DB_NAME = 'db'
 DB_USER = 'postgres'
-DB_PASSWORD = 'Pianist463'
+DB_PASSWORD = '99iCloud'
 
 
 class DB:
