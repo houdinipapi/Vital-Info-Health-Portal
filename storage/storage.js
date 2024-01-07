@@ -62,6 +62,12 @@ export const FormData = [
     type: "number",
     value: ""
   },
+    {
+    label: "Gender",
+    name: "gender",
+    type: "text",
+    value: ""
+  },
   {
     label: "Email",
     name: "email",
@@ -102,18 +108,6 @@ export const FormData = [
     label: "Zip Code",
     name: "zip",
     type: "text",
-    value: ""
-  },
-  {
-    label: "Issue",
-    name: "issue",
-    type: "textarea",
-    value: ""
-  },
-  {
-    label: "Symptoms",
-    name: "symptoms",
-    type: "textarea",
     value: ""
   },
   {
@@ -161,7 +155,7 @@ export const FormData = [
   {
     label: "Time of Registration",
     name: "timeOfRegistration",
-    type: "text",
+    type: "time",
     value: ""
   }
 ];
