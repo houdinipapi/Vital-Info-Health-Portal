@@ -91,7 +91,7 @@ def add_patient():
         return jsonify({'error': 'Failed to add patient'}), 500
 
 
-@app.route('/patients/<int:patient_id>', methods=['DELETE'])
+@app.route('/patients/del/<int:patient_id>', methods=['DELETE'])
 def remove_patient(patient_id):
     success = patients.remove_patient(patient_id)
     if success:

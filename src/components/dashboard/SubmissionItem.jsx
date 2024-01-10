@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { CircularProgress, Container, Typography, Paper } from '@mui/material';
+import { CircularProgress, Container, Typography, Paper, Box, Divider } from '@mui/material';
 
-function SubmissionItem() {
-  const { submissionId } = useParams();
-  const [submission, setSubmission] = useState(null);
+function PatientDetails() {
+  const { patientId } = useParams();
+  const [patient, setPatient] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchSubmission = async () => {
+    const fetchPatient = async () => {
       try {
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${submissionId}`);
-        setSubmission(response.data);
+        const response = await axios.get(`http://localhost:5000/patients/${patientId}`);
+        setPatient(response.data.patient);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching submission:', error);
+        console.error('Error fetching patient:', error);
         setLoading(false);
       }
     };
 
-    fetchSubmission();
-  }, [submissionId]);
+    fetchPatient();
+  }, [patientId]);
 
   return (
     <Container maxWidth="md" style={{ marginTop: '20px' }}>
@@ -33,15 +33,42 @@ function SubmissionItem() {
         ) : (
           <div>
             <Typography variant="h4" gutterBottom>
-              Submission ID: {submission.id}
+              Patient ID: {patient.id}
             </Typography>
-            <Typography variant="h5" gutterBottom>
-              {submission.title}
-            </Typography>
-            <Typography variant="body1">
-              {submission.body}
-            </Typography>
-            {/* You can display more details from the submission object as needed */}
+            <Divider />
+            <Box mt={2}>
+              <Typography variant="h5" gutterBottom>
+                {`${patient.data.firstName} ${patient.data.lastName}`}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Email: {patient.data.email}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Age: {patient.data.age}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Date of Birth: {patient.data.dateOfBirth}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Blood Group: {patient.data.bloodGroup}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Address: {patient.data.address}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                County: {patient.data.county}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Height: {patient.data.height}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Weight: {patient.data.weight}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Date of Registration: {patient.dateOfRegistration}
+              </Typography>
+
+            </Box>
           </div>
         )}
       </Paper>
@@ -49,4 +76,4 @@ function SubmissionItem() {
   );
 }
 
-export default SubmissionItem;
+export default PatientDetails;

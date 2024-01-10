@@ -32,8 +32,6 @@ class Patients:
                         'bloodGroup': data.get('bloodGroup'),
                         'height': data.get('height'),
                         'weight': data.get('weight'),
-                        'dateOfRegistration': data.get('dateOfRegistration'),
-                        'timeOfRegistration': data.get('timeOfRegistration')
                     },
                     'dateOfRegistration': date_of_registration.strftime("%a, %d %b %Y %H:%M:%S GMT")
                 }
@@ -48,7 +46,7 @@ class Patients:
                 cur.close()
             if conn:
                 conn.close()
-                
+
     @staticmethod
     def get_patient(patient_id):
         conn = None
@@ -62,45 +60,26 @@ class Patients:
             if patient:
                 # Assuming the patient tuple contains 'id' and 'data' columns
                 labeled_patient = {
-                        'id': patient[0],  # Labeling ID
-                        'data': {
-                            'firstName': patient[1].get('firstName'),
-                            'lastName': patient[1].get('lastName'),
-                            'dateOfBirth': patient[1].get('dateOfBirth'),
-                            'age': patient[1].get('age'),
-                            'email': patient[1].get('email'),
-                            'phone': patient[1].get('phone'),
-                            'address': patient[1].get('address'),
-                            'county': patient[1].get('county'),
-                            'bloodGroup': patient[1].get('bloodGroup'),
-                            'height': patient[1].get('height'),
-                            'weight': patient[1].get('weight'),
-                            'dateOfRegistration': patient[1].get('dateOfRegistration'),
-                            'timeOfRegistration': patient[1].get('timeOfRegistration')
-                        },
-                        'dateOfRegistration': patient[2].strftime("%a, %d %b %Y %H:%M:%S GMT")  # Labeling date
+                    'id': patient[0],  # Labeling ID
+                    'data': {
+                        'firstName': patient[1].get('firstName'),
+                        'lastName': patient[1].get('lastName'),
+                        'dateOfBirth': patient[1].get('dateOfBirth'),
+                        'age': patient[1].get('age'),
+                        'email': patient[1].get('email'),
+                        'phone': patient[1].get('phone'),
+                        'address': patient[1].get('address'),
+                        'county': patient[1].get('county'),
+                        'bloodGroup': patient[1].get('bloodGroup'),
+                        'height': patient[1].get('height'),
+                        'weight': patient[1].get('weight'),
+                    },
+                    # Labeling date
+                    'dateOfRegistration': patient[2].strftime("%a, %d %b %Y %H:%M:%S GMT")
                 }
                 return labeled_patient  # Return labeled patient details
             else:
                 return None  # Return None if patient is not found
-        except Exception as e:
-            # Log the exception or handle it as needed
-            return None
-        finally:
-            if cur:
-                cur.close()
-            if conn:
-                conn.close()
-                
-        conn = None
-        try:
-            conn = DB.create_connection()
-            cur = conn.cursor()
-
-            cur.execute("SELECT * FROM patients WHERE id = %s", (patient_id,))
-            patient = cur.fetchone()
-
-            return patient  # Return patient details
         except Exception as e:
             # Log the exception or handle it as needed
             return None
@@ -121,7 +100,7 @@ class Patients:
             required_keys = [
                 "firstName", "lastName", "dateOfBirth", "age", "email",
                 "phone", "address", "county", "bloodGroup", "height",
-                "weight", "dateOfRegistration", "timeOfRegistration"
+                "weight"
             ]
             if not all(key in data and isinstance(data[key], str) for key in required_keys):
                 return None  # If data does not meet required structure, return None
@@ -140,8 +119,7 @@ class Patients:
                 cur.close()
             if conn:
                 conn.close()
-                
-                
+
     @staticmethod
     def remove_patient(patient_id):
         conn = None

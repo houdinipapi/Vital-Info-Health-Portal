@@ -15,8 +15,8 @@ const SubmissionsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/patients/all');
-        setSubmissions(response.data.patients); // Access patients array from response.data
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        setSubmissions(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -34,10 +34,7 @@ const SubmissionsPage = () => {
   };
 
   const filteredSubmissions = submissions.filter(submission =>
-    submission.data.firstName.toLowerCase().includes(filterParam.toLowerCase()) ||
-    submission.data.lastName.toLowerCase().includes(filterParam.toLowerCase()) || 
-    submission.data.email.toLowerCase().includes(filterParam.toLowerCase()) || 
-    submission.data.age.toLowerCase().includes(filterParam.toLowerCase())
+    submission.title.toLowerCase().includes(filterParam.toLowerCase())
   );
 
   return (
@@ -45,32 +42,25 @@ const SubmissionsPage = () => {
       <Typography variant="h4" gutterBottom>
         Submissions
       </Typography>
-      <TextField
-        fullWidth
-        label="Search Patients"
-        value={filterParam}
-        onChange={(e) => handleFilterChange(e.target.value)}
-        variant="outlined"
-        margin="normal"
-        placeholder="Filter..."
-      />
+        <TextField
+          fullWidth
+          label="Search Medicines"
+          value={filterParam}
+          onChange={(e) => handleFilterChange(e.target.value)}
+          variant="outlined"
+          margin="normal"
+          placeholder="Filter by title..."
+        />
 
       {loading ? (
         <CircularProgress />
       ) : (
         <List>
           {filteredSubmissions.map(submission => (
-            <ListItem
-              style={{ cursor: "pointer" }}
-              key={submission.id}
-              onClick={() => {
-                navigate(`/user/dashboard/submissions/${submission.id}`)
-              }}
-            >
-              <ListItemText
-                primary={`${submission.data.firstName} ${submission.data.lastName}`} // Access firstName and lastName from data object
-                secondary={`Age: ${submission.data.age}, Email: ${submission.data.email}`} // Example secondary information
-              />
+            <ListItem style={{cursor: "pointer"}} key={submission.id} onClick={() => {
+              navigate(`/user/dashboard/submissions/${submission.id}`)
+            }}>
+              <ListItemText primary={submission.title} secondary={submission.body} />
             </ListItem>
           ))}
         </List>

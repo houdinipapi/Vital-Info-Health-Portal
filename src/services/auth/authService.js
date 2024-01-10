@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 
 export const RegisterUser = async (userData, setAccountCreated) => {
   try {
-    const response = await fetch('http://localhost:8080/register', {
+    const response = await fetch('http://localhost:5000/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export const RegisterUser = async (userData, setAccountCreated) => {
 
 export const LoginUser = async (credentials, setAuth, setError, setLoginSuccess) => {
   try {
-    const response = await fetch('http://localhost:8080/login', {
+    const response = await fetch('http://localhost:5000/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

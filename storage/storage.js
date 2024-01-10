@@ -44,12 +44,7 @@ export const FormData = [
     type: "text",
     value: ""
   },
-  {
-    label: "Kin Name",
-    name: "kinName",
-    type: "text",
-    value: ""
-  },
+
   {
     label: "Date of Birth",
     name: "dateOfBirth",
@@ -80,12 +75,7 @@ export const FormData = [
     type: "tel",
     value: ""
   },
-  {
-    label: "Alternate Contact Number",
-    name: "AlternateContactNumber",
-    type: "tel",
-    value: ""
-  },
+
   {
     label: "Address",
     name: "address",
@@ -122,42 +112,13 @@ export const FormData = [
     type: "text",
     value: ""
   },
-  {
-    label: "Next of Kin's Name",
-    name: "nextOfKinsName",
-    type: "text",
-    value: ""
-  },
+
   {
     label: "Weight",
     name: "weight",
     type: "text",
     value: ""
   },
-  {
-    label: "Aadhar ID",
-    name: "AadharId",
-    type: "text",
-    value: ""
-  },
-  {
-    label: "Pin Code",
-    name: "pinCode",
-    type: "text",
-    value: ""
-  },
-  {
-    label: "Date of Registration",
-    name: "dateOfRegistration",
-    type: "date",
-    value: ""
-  },
-  {
-    label: "Time of Registration",
-    name: "timeOfRegistration",
-    type: "time",
-    value: ""
-  }
 ];
 
 

@@ -16,7 +16,6 @@ import ProfilePage from "./user/ProfilePage"
 import SubmissionItem from "./components/dashboard/SubmissionItem"
 import MedicineItem from "./components/dashboard/MedicineItem"
 
-
 function App() {
   const [auth, setAuth] = useState(false);
   const [accountCreated, setAccountCreated] = useState(false);
@@ -55,8 +54,7 @@ function App() {
 
         <Route path="/user/dashboard/new-submission" Component={NewSubmission}/>
         <Route path="/user/dashboard/submissions" Component={SubmissionsPage}/>
-        <Route path="/user/dashboard/submissions/:submissionId" Component={SubmissionItem}/>
-
+        <Route path="/user/dashboard/submissions/:patientId" Component={SubmissionItem}/>
 
       </Route>
     )

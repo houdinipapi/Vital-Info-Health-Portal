@@ -3,7 +3,7 @@ import psycopg2
 DB_HOST = 'localhost'
 DB_NAME = 'db'
 DB_USER = 'postgres'
-DB_PASSWORD = '99iCloud'
+DB_PASSWORD = 'Pianist463'
 
 
 class DB:
@@ -49,7 +49,6 @@ class DB:
                     AND jsonb_typeof(data->'height') = 'string'
                     AND jsonb_typeof(data->'weight') = 'string'
                     AND jsonb_typeof(data->'dateOfRegistration') = 'string'
-                    AND jsonb_typeof(data->'timeOfRegistration') = 'string'
                 ),
                 date_of_registration TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
             )
