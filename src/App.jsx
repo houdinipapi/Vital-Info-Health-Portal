@@ -15,6 +15,7 @@ import NewSubmission from "./user/NewSubmission"
 import ProfilePage from "./user/ProfilePage"
 import SubmissionItem from "./components/dashboard/SubmissionItem"
 import MedicineItem from "./components/dashboard/MedicineItem"
+import NewDiagnosis from "./user/diagnosis/NewDiagnosis"
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -55,6 +56,10 @@ function App() {
         <Route path="/user/dashboard/new-submission" Component={NewSubmission}/>
         <Route path="/user/dashboard/submissions" Component={SubmissionsPage}/>
         <Route path="/user/dashboard/submissions/:patientId" Component={SubmissionItem}/>
+
+         <Route path="/user/dashboard/new-diagnosis" Component={NewDiagnosis}/>
+        <Route path="/user/dashboard/diagnosis/:patientId" Component={SubmissionItem}/>
+
 
       </Route>
     )

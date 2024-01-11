@@ -122,6 +122,28 @@ export const FormData = [
 ];
 
 
+export const FormDataDiagnosis = [
+  {
+    label: "Patient ID",
+    name: "patient_id",
+    type: "number",
+    value: ""
+  },
+  {
+    label: "Diagnosis Type",
+    name: "diagnosis_type",
+    type: "text",
+    value: ""
+  },
+  {
+    label: "Diagnosis Description",
+    name: "diagnosis_description",
+    type: "text",
+    value: ""
+  }
+];
+
+
 
 export const username = Cookies.get('username')
 export const authToken = Cookies.get("authToken")

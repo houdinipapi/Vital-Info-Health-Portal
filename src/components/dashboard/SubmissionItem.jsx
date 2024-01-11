@@ -6,6 +6,7 @@ import { CircularProgress, Container, Typography, Paper, Box, Divider } from '@m
 function PatientDetails() {
   const { patientId } = useParams();
   const [patient, setPatient] = useState(null);
+  const [diagnosis, setDiagnosis] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,7 +21,19 @@ function PatientDetails() {
       }
     };
 
+    const fetchPatientDiagnosis = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/diagnosis/${patientId}`);
+        setDiagnosis(response.data.diagnosis);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching patient diagnosis:', error);
+        setLoading(false);
+      }
+    }
+
     fetchPatient();
+    fetchPatientDiagnosis();
   }, [patientId]);
 
   return (
@@ -69,6 +82,10 @@ function PatientDetails() {
               </Typography>
 
             </Box>
+            <div>Diagnosis</div>
+            <section>
+              {/* Render diagnosis here */}
+            </section>
           </div>
         )}
       </Paper>

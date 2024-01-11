@@ -52,7 +52,29 @@ function Dashboard() {
                 </Button>
               </Paper>
             </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Paper elevation={3} sx={{ p: 3 }}>
+                <Typography variant="h5" gutterBottom>
+                  Create New Diagnosis
+                </Typography>
+                <Typography>
+                  Create a new diagnosis here.
+                </Typography>
+                <Button
+                  id='btn-link'
+                  component={Link}
+                  to="/user/dashboard/new-diagnosis"
+                  variant="contained"
+                  color="primary"
+                  sx={{ mt: 2 }}
+                >
+                  Create Diagnosis
+                </Button>
+              </Paper>
+            </Grid>
           </Grid>
+          
         </Container>
       </main>
     </MotionWrapper>
