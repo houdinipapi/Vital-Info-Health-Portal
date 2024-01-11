@@ -105,3 +105,69 @@ This endpoint adds a new patient to the database. The request body should includ
 
 ```
 DELETE /patients/del/<int:patient_id>
+
+ # User Authentication System with Cookies
+
+This repository contains a simple user authentication system built with Node.js and Express. The system allows users to register and log in, and stores their authentication tokens in cookies.
+
+## Prerequisites
+
+To run this application, you will need the following:
+
+* Node.js and npm installed
+* A MongoDB database
+
+## Installation
+
+1. Clone this repository to your local machine.
+2. Run `npm install` to install the necessary dependencies.
+3. Create a `.env` file in the root directory of the project and add the following environment variables:
+
+```
+MONGODB_URI=mongodb://localhost:27017/user-auth
+```
+
+4. Start the MongoDB database.
+5. Run `npm start` to start the application.
+
+## Usage
+
+### Registration
+
+To register a new user, send a POST request to the `/register` endpoint with the following JSON payload:
+
+```json
+{
+  "username": "username",
+  "email": "email@example.com",
+  "password": "password"
+}
+```
+
+If the registration is successful, the server will respond with a 200 status code and a JSON payload containing the user's ID and authentication token.
+
+### Login
+
+To log in a user, send a POST request to the `/login` endpoint with the following JSON payload:
+
+```json
+{
+  "email": "email@example.com",
+  "password": "password"
+}
+```
+
+If the login is successful, the server will respond with a 200 status code and a JSON payload containing the user's ID and authentication token.
+
+## Cookies
+
+The authentication tokens are stored in cookies. When a user registers or logs in, the server sets a cookie named `authToken` with the user's authentication token. This cookie expires after 5 minutes.
+
+The `username` and `email` are also stored in cookies named `username` and `email` respectively. These cookies also expire after 5 minutes.
+
+## Security
+
+This authentication system uses cookies to store authentication tokens. Cookies are vulnerable to a number of security attacks, such as cross-site scripting (XSS) and cross-site request forgery (CSRF). To mitigate these risks, it is important to implement additional security measures, such as:
+
+* Using HTTPS to encrypt all traffic between the client and the server
+* Setting the `SameSite` attribute
