@@ -116,7 +116,7 @@ This repository contains a simple user authentication system built with Node.js 
 To run this application, you will need the following:
 
 * Node.js and npm installed
-* A MongoDB database
+* A Postgres database
 
 ## Installation
 
@@ -125,10 +125,10 @@ To run this application, you will need the following:
 3. Create a `.env` file in the root directory of the project and add the following environment variables:
 
 ```
-MONGODB_URI=mongodb://localhost:27017/user-auth
+Postgres_URI=Postgres://localhost:27017/user-auth
 ```
 
-4. Start the MongoDB database.
+4. Start the Postgres database.
 5. Run `npm start` to start the application.
 
 ## Usage
