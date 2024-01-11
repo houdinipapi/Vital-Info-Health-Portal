@@ -105,6 +105,7 @@ This endpoint adds a new patient to the database. The request body should includ
 
 ```
 DELETE /patients/del/<int:patient_id>
+```
 
  # User Authentication System with Cookies
 
