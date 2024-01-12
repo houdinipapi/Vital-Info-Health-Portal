@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, List, ListItem, ListItemText, CircularProgress, TextField } from '@mui/material';
+import { Container, Typography, Card, CardContent, CircularProgress, TextField } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const DiagnosisPage = () => {
@@ -15,8 +15,8 @@ const DiagnosisPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-        setSubmissions(response.data);
+        const response = await axios.get('http://localhost:5000/diagnosis/all');
+        setSubmissions(response.data.all_diagnosis);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -34,7 +34,7 @@ const DiagnosisPage = () => {
   };
 
   const filteredSubmissions = submissions.filter(submission =>
-    submission.title.toLowerCase().includes(filterParam.toLowerCase())
+    submission.data.diagnosis_description.toLowerCase().includes(filterParam.toLowerCase())
   );
 
   return (
@@ -42,29 +42,36 @@ const DiagnosisPage = () => {
       <Typography variant="h4" gutterBottom>
         Submissions
       </Typography>
-        <TextField
-          fullWidth
-          label="Search Medicines"
-          value={filterParam}
-          onChange={(e) => handleFilterChange(e.target.value)}
-          variant="outlined"
-          margin="normal"
-          placeholder="Filter by title..."
-        />
+      <TextField
+        fullWidth
+        label="Search Medicines"
+        value={filterParam}
+        onChange={(e) => handleFilterChange(e.target.value)}
+        variant="outlined"
+        margin="normal"
+        placeholder="Filter by description..."
+      />
 
       {loading ? (
-        <CircularProgress />
-      ) : (
-        <List>
-          {filteredSubmissions.map(submission => (
-            <ListItem style={{cursor: "pointer"}} key={submission.id} onClick={() => {
-              navigate(`/user/dashboard/submissions/${submission.id}`)
-            }}>
-              <ListItemText primary={submission.title} secondary={submission.body} />
-            </ListItem>
-          ))}
-        </List>
-      )}
+          <CircularProgress />
+        ) : (
+          <>
+            {filteredSubmissions.map(submission => (
+              <div key={submission.id} style={{ margin: '1rem 0', cursor: 'pointer' }} onClick={() => navigate("/user/dashboard/submissions/" + submission.patient_id)}>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h6" component="div">
+                      {submission.data.diagnosis_type}
+                    </Typography>
+                    <Typography color="textSecondary">
+                      {submission.data.diagnosis_description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </>
+        )}
     </Container>
   );
 };

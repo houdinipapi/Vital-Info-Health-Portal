@@ -156,7 +156,7 @@ def get_diagnosis(patient_id):
     if patient_diagnosis:
         return jsonify({'diagnosis': patient_diagnosis}), 200
     else:
-        return jsonify({'error': 'Diagnosis not found for the patient'}), 404
+        return jsonify({'error': 'Diagnosis not found for the patient'}), 201
 
 
 @app.route('/diagnosis/del/<int:patient_id>', methods=['DELETE'])
@@ -184,6 +184,16 @@ def update_diagnosis(diagnosis_id):
             return jsonify({'error': 'Failed to retrieve updated diagnosis information'}), 500
     else:
         return jsonify({'error': 'Failed to update diagnosis data'}), 500
+
+
+@app.route('/diagnosis/all', methods=['GET'])
+def all_diagnosis():
+    all_diagnosis = diagnosis.all_diagnosis();
+    
+    if all_diagnosis:
+        return jsonify({'all_diagnosis': all_diagnosis}), 200
+    else:
+        return jsonify({'error': 'Diagnosis data is unavailable'}), 201
 
 
 if __name__ == '__main__':

@@ -16,6 +16,7 @@ import ProfilePage from "./user/ProfilePage"
 import SubmissionItem from "./components/dashboard/SubmissionItem"
 import MedicineItem from "./components/dashboard/MedicineItem"
 import NewDiagnosis from "./user/diagnosis/NewDiagnosis"
+import DiagnosisPage from "./user/diagnosis/Diagnosis"
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -59,6 +60,8 @@ function App() {
 
          <Route path="/user/dashboard/new-diagnosis" Component={NewDiagnosis}/>
         <Route path="/user/dashboard/diagnosis/:patientId" Component={SubmissionItem}/>
+        <Route path="/user/dashboard/diagnosis" Component={DiagnosisPage}/>
+
 
 
       </Route>

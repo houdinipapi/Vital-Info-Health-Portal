@@ -41,6 +41,9 @@ class Diagnosis:
                 "SELECT * FROM diagnosis WHERE patient_id = %s", (patient_id,))
             diagnosis_data = cur.fetchall()
 
+            if not diagnosis_data:
+                return "Patient has no diagnosis"
+                
             labeled_diagnosis = []
             for diagnosis in diagnosis_data:
                 diagnosis_id, patient_id, data, date = diagnosis

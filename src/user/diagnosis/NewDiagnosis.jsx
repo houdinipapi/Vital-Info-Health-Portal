@@ -33,8 +33,6 @@ const NewDiagnosis = () => {
         }
       };
 
-      console.log('Diagnosis object:', diagnosisObject);
-      // alert(JSON.stringify(diagnosisObject, null, 2));
 
       // Pass the diagnosis object to NewDiagnosisService
       await NewDiagnosisService(diagnosisObject, setSubmitSuccess);
@@ -55,8 +53,10 @@ const NewDiagnosis = () => {
 
   useEffect(() => {
     if(submitSuccess) {
-      toast.success("Patient submitted successfully!!")
-      navigate('/')
+      toast.success("Patient submitted successfully!!");
+      setTimeout(() => {
+       navigate('/')        
+      }, 3000);
     }
   },[navigate, submitSuccess])
 
